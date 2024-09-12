@@ -57,7 +57,7 @@
     <script>
         // 서버로 데이터를 전송하는 함수 (IP 주소 수정)
         function sendData(selectedNumber) {
-            fetch('http://192.168.120.133:4001/api/submit', {  // 올바른 IP로 수정
+            fetch('http://192.168.120.133:8001/api/submit', {  // 올바른 IP로 수정
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
