@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지 선택</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            justify-items: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .item img {
+            width: 100%; 
+            max-width: 500px; 
+            height: auto;
+            cursor: pointer;
+            border: 2px solid transparent;
+            pointer-events: auto;
+            touch-action: manipulation;
+        }
+        .selected {
+            border: 2px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>4가지의 포즈로 영상 구성</h1>
+    <div class="container">
+        <div class="item">
+            <img src="image1.jpg" alt="건강하세요" data-number="1">
+            <p>건강하세요~</p>
+        </div>
+        <div class="item">
+            <img src="image2.jpg" alt="사랑합니다" data-number="2">
+            <p>사랑합니다♡</p>
+        </div>
+        <div class="item">
+            <img src="image3.jpg" alt="괜찮아!" data-number="3">
+            <p>괜찮아! 너 잘하고 있어</p>
+        </div>
+        <div class="item">
+            <img src="image4.jpg" alt="항상 행복하세요" data-number="4">
+            <p>항상 행복하세요!</p>
+        </div>
+    </div>
+
+    <script>
+        // 서버로 데이터를 전송하는 함수 (IP 주소 수정)
+        function sendData(selectedNumber) {
+            fetch('http://192.168.120.133:4001/api/submit', {  // 올바른 IP로 수정
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ selectedNumber: selectedNumber }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('서버 응답:', data.message);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    
+        // 터치 및 클릭 이벤트 처리
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('click', function() {
+                const selectedNumber = img.getAttribute('data-number');
+                sendData(selectedNumber);
+            });
+        });
+    </script>
+    
+</body>
+</html>
