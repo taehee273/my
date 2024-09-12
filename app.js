@@ -3,7 +3,7 @@ const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const app = express();
-const port = 4001;
+const port = 8001;
 
 app.use(cors({
     origin: '*',
