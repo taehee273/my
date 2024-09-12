@@ -30,7 +30,7 @@
 
     <script>
         // 서버에서 데이터를 불러오는 함수
-        fetch('http://localhost:3001/api/data')
+        fetch('http://localhost:8001/api/data')
         .then(response => response.json())
         .then(data => {
             document.getElementById('data').textContent = data.data;  // 서버에서 받은 데이터를 표시
